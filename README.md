@@ -1,6 +1,8 @@
-# D3-minimal
+# Buffer audio D3-player
 
-Minimalistic D3.js setup.
+Loop buffer audio player based on D3.js and Audio API.
+
+![Screenshot](/screenshot.png?raw=true)
 
 ## Getting started
 
