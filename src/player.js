@@ -9,13 +9,11 @@ export default class BufferPlayer {
     this.loop = loop
     this.mode = 0
     this.offset = 0
+    this.isPlaying = false
     this.buffer = buffer
   }
   get duration() {
     return this.buffer && this.buffer.duration
-  }
-  get isPlaying() {
-    return this.source && this.source.playbackState
   }
   get currentTime() {
     if(this.isPlaying)
@@ -27,6 +25,7 @@ export default class BufferPlayer {
     this.source && this.source.stop()
     this.offset = this.currentTime
     this.source = null
+    this.isPlaying = false
   }
   pause() {
     if(this.isPlaying) {
@@ -36,7 +35,7 @@ export default class BufferPlayer {
     }
   }
   disconnect(){
-    nodes.forEach(node => this.source.disconnect(node))
+    this.source && this.source.disconnect()
   }
   connect() {
     nodes.reduce((src, node, i) => {
@@ -57,9 +56,10 @@ export default class BufferPlayer {
     this.ts = ac.currentTime
     if(k){
       this.stop()
-      this.offset = this.duration * k
+      this.offset = Math.abs(this.duration * k)
     }
     this.prepare()
     this.source.start(0, this.offset)
+    this.isPlaying = true
   }
 }

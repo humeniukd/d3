@@ -1,3 +1,7 @@
+body {
+    font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+
 .content {
     display: flex;
     flex-direction: column;
@@ -8,15 +12,11 @@ header {
 }
 
 svg {
-    margin: 30px;
+    margin: 40px;
     overflow: visible;
 }
 
-.axis.y.left line {
-    stroke: none;
-}
-
-.axis.y.left text{
+.axis.y.left text {
     fill: blueviolet;
 }
 
@@ -24,13 +24,10 @@ svg {
     fill: darkcyan;
 }
 
-.axis.y.right line{
-    stroke: none;
-}
-
-.freq.y line{
-    stroke: none;
-    fill: none;
+.axis.y.right line,
+.axis.y.left line,
+.freq.y line, .freq.x line {
+    stroke-width: 1;
 }
 
 .freq.y text{
@@ -38,10 +35,6 @@ svg {
     fill: red;
 }
 
-.freq.x line{
-    stroke: none;
-}
-
-.freq.x path{
-    stroke: none;
+.time {
+    fill: lightslategray;
 }

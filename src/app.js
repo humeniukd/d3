@@ -10,10 +10,10 @@ import { axisLeft, axisRight, axisBottom } from 'd3-axis'
 import { area } from 'd3-shape'
 
 const height = 200
-const width = 1200
+const width = 800
 const worker = Worker()
 
-let player, g, gradient, flag, x, timeDisplay, label
+let player, g, gradient, flag, timeDisplay, label, x
 
 const fx = () => {
   player.disconnect()
@@ -23,7 +23,7 @@ const fx = () => {
 
 document.querySelector('button').addEventListener('click', fx)
 
-const wf = select('#waveform')
+const wf = select('#wf')
 
 const y = scaleLinear()
   .domain([0., 1.])
@@ -33,8 +33,8 @@ const Y = scaleLinear()
   .domain([-120, 0])
   .range([height, 0])
 
-const YAxis = axisLeft(Y).ticks(5).tickSize(20)
-const yAxis = axisRight(y).ticks(10).tickPadding(10).tickSize(20)
+const YAxis = axisLeft(Y).ticks(5).tickSize(5)
+const yAxis = axisRight(y).ticks(10).tickPadding(10).tickSize(0)
 
 const a = area()
   .x((d, i) => i)
@@ -51,18 +51,18 @@ const A = area()
     return Y(db)
   })
 
-const init = (b) => {
+const init = (buffer) => {
   wf.html('')
   player && player.stop()
-  player = new Player(b)
+  player = new Player(buffer)
 
   x = scaleTime()
     .domain([0, player.duration*1000])
     .range([0, width])
 
-  timeDisplay = x.tickFormat(20, timeFormat('%M:%S'))
+  timeDisplay = x.tickFormat(16, timeFormat('%M:%S'))
 
-  const xAxis = axisBottom(x).ticks(20).tickFormat(timeDisplay)
+  const xAxis = axisBottom(x).ticks(16).tickFormat(timeDisplay)
 
   const defs = wf.append('defs')
   gradient = defs.append('linearGradient').attr('id', 'progress')
@@ -73,13 +73,13 @@ const init = (b) => {
 
   gradient.append('stop')
     .attr('stop-color', 'magenta')
-    .attr('offset', '1%')
+    .attr('offset', '0%')
 
   gradient.append('stop')
     .attr('stop-color', 'blueviolet')
-    .attr('offset', '1%')
+    .attr('offset', '0%')
 
-  g = wf.append('g').attr('transform', 'transform="translate(40)"')
+  g = wf.append('g')
 
   g.append('g')
     .attr('class', 'axis y left')
@@ -95,7 +95,8 @@ const init = (b) => {
   label = g.append('g')
     .append('text')
     .text('0:00')
-    .attr('class', 'label')
+    .attr('class', 'time')
+    .attr('transform', `translate(${width-50},10)`)
 }
 
 const progress = () => {
@@ -109,7 +110,7 @@ wf.on('click', function() {
   const m = mouse(this)
   const x = m[0]
   const k = x/width
-  player.play(k)
+  player && player.play(k)
 })
 const input = document.querySelector('input')
 
