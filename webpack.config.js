@@ -1,13 +1,17 @@
 const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  devtool: 'eval',
   entry: './src/app.js',
   resolve: {
     modulesDirectories: ['src', 'node_modules'],
     extensions: ['', '.js']
   },
+    output: {
+        path: __dirname + '/build',
+        publicPath: "/d3/",
+        filename: "[name].js", //-[chunkhash]
+        chunkFilename: "[name].js"
+    },
   module: {
     loaders: [
       {
@@ -26,18 +30,12 @@ module.exports = {
       { test: /\.css$/, loader: "style-loader!css-loader" }
     ]
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      inject: 'body',
-      template: 'src/index.html'
-    }),
-    new webpack.HotModuleReplacementPlugin()
-  ],
-  devServer: {
-    hot: true,
-    quiet: true,
-    inline: true,
-    stats: false,
-    watchOptions: { poll: 1000, ignored: /node_modules/ }
-  }
+    plugins: [
+      new webpack.optimize.UglifyJsPlugin({
+        output: {comments: false},
+        compress: {
+          warnings: false
+        }
+      })
+    ],
 };
