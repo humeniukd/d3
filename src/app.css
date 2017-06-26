@@ -1,0 +1,47 @@
+.content {
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    display: flex;
+}
+
+svg {
+    margin: 30px;
+    overflow: visible;
+}
+
+.axis.y.left line {
+    stroke: none;
+}
+
+.axis.y.left text{
+    fill: blueviolet;
+}
+
+.axis.y.right text{
+    fill: darkcyan;
+}
+
+.axis.y.right line{
+    stroke: none;
+}
+
+.freq.y line{
+    stroke: none;
+    fill: none;
+}
+
+.freq.y text{
+    padding-right: 10px;
+    fill: red;
+}
+
+.freq.x line{
+    stroke: none;
+}
+
+.freq.x path{
+    stroke: none;
+}
