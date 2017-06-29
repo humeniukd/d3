@@ -3,12 +3,27 @@ body {
 }
 
 .content {
+    margin: 50px;
     display: flex;
     flex-direction: column;
 }
 
-header {
-    display: flex;
+@media (min-width: 768px) and (max-width: 991px) {
+    .content {
+        margin: 80px;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    .content {
+        margin: 100px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .content {
+        margin: 120px;
+    }
 }
 
 svg {
@@ -22,12 +37,6 @@ svg {
 
 .axis.y.right text{
     fill: darkcyan;
-}
-
-.axis.y.right line,
-.axis.y.left line,
-.freq.y line, .freq.x line {
-    stroke-width: 1;
 }
 
 .freq.y text{
