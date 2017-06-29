@@ -7,14 +7,14 @@
     "start": "webpack-dev-server --port=8000"
   },
   "repository": {
-    "url": "git@github.com:loudyo/ddd.git",
+    "url": "git@github.com:loudyo/d3.git",
     "type": "git"
   },
   "author": "Dmytro Humeniuk<humeniukd_epam@ryanair.com>",
   "bugs": {
-    "url": "https://github.com/loudyo/ddd/issues"
+    "url": "https://github.com/loudyo/d3/issues"
   },
-  "homepage": "https://github.com/loudyo/ddd#readme",
+  "homepage": "https://github.com/loudyo/d3#readme",
   "dependencies": {
     "d3-axis": "^1.0.8",
     "d3-scale": "^1.0.6",
